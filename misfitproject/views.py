@@ -1,12 +1,16 @@
 from django.views.generic.list import ListView, View
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render_to_response, get_object_or_404
+from django.template import RequestContext, loader
 
 class IndexClass(ListView):
     """
-    Renders Index.html and Returns recent public activity.
+    This is index page.
     """
-    template_name = 'index.html'
 
+    def get(self, request, *args, **kwargs):
+        context_dict = {}
+        return render_to_response(
+            'index.html',
+            RequestContext(request, context_dict))
 
-    def get_context_data(self, *args, **kwargs):
-        context = super(ListView, self).get_context_data(*args, **kwargs)
-        return context
