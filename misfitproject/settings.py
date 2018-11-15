@@ -15,6 +15,10 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# Defines the directory that contains the settings file as the PROJECT_ROOT
+# It is used for relative settings elsewhere.
+PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.8/howto/deployment/checklist/
@@ -26,6 +30,34 @@ SECRET_KEY = 'jb82r2(+y7tw_cs3w#3p=#hwuj4w_(n8zpaa6e39ljw_uzv^u#'
 DEBUG = True
 
 ALLOWED_HOSTS = []
+
+STATIC_ROOT = os.getenv('STATIC_ROOT',
+                        os.path.join(PROJECT_ROOT, "static_root")
+                        )
+
+# URL that handles the static files like app media.
+# Example: "http://media.lawrence.com"
+STATIC_URL = os.getenv('STATIC_URL', "/static/")
+
+# Additional directories which hold static files
+_DEFAULT_STATICFILES_DIRS = [
+    os.path.join(PROJECT_ROOT, "static"),
+]
+
+STATICFILES_DIRS = os.getenv('STATICFILES_DIRS', _DEFAULT_STATICFILES_DIRS)
+
+# List of finder classes that know how to find static files in
+# various locations.
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+)
+
+
+# Login and logout urls override
+LOGIN_URL = os.getenv('LOGIN_URL', '/account/login/')
+LOGOUT_URL = os.getenv('LOGOUT_URL', '/account/logout/')
 
 
 # Application definition
@@ -55,7 +87,7 @@ ROOT_URLCONF = 'misfitproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(PROJECT_ROOT, "templates")],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -95,8 +127,23 @@ USE_L10N = True
 
 USE_TZ = True
 
+ANONYMOUS_USER_ID = os.getenv('ANONYMOUS_USER_ID','-1')
+GUARDIAN_GET_INIT_ANONYMOUS_USER = os.getenv(
+    'GUARDIAN_GET_INIT_ANONYMOUS_USER',
+    'geonode.people.models.get_anonymous_user_instance'
+)
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.8/howto/static-files/
 
-STATIC_URL = '/static/'
+# Replacement of default authentication backend in order to support
+# permissions per object.
+AUTHENTICATION_BACKENDS = (
+    'oauth2_provider.backends.OAuth2Backend',
+    'django.contrib.auth.backends.ModelBackend',
+    'guardian.backends.ObjectPermissionBackend',
+    'account.auth_backends.EmailAuthenticationBackend',
+
+    # Authentication backend for facebook
+    # 'social.backends.facebook.FacebookOAuth2',
+    # 'social.backends.google.GoogleOAuth2',
+
+)
