@@ -59,6 +59,9 @@ STATICFILES_FINDERS = (
 LOGIN_URL = os.getenv('LOGIN_URL', '/account/login/')
 LOGOUT_URL = os.getenv('LOGOUT_URL', '/account/logout/')
 
+#override AbstractUser and create a new user model
+AUTH_USER_MODEL = os.getenv('AUTH_USER_MODEL', 'people.Profile')
+
 
 # Application definition
 
@@ -69,6 +72,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'account',
+    'guardian',
+
+    #misfit apps
     'misfitproject.people',
     'misfitproject.request'
 )
@@ -82,6 +89,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'misfitproject.middleware.LoginRequiredMiddleware'
 )
 
 ROOT_URLCONF = 'misfitproject.urls'
@@ -97,6 +105,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'misfitproject.context_processor.resource_urls'
             ],
         },
     },
@@ -132,17 +141,17 @@ USE_TZ = True
 ANONYMOUS_USER_ID = os.getenv('ANONYMOUS_USER_ID','-1')
 GUARDIAN_GET_INIT_ANONYMOUS_USER = os.getenv(
     'GUARDIAN_GET_INIT_ANONYMOUS_USER',
-    'geonode.people.models.get_anonymous_user_instance'
+    'misfitproject.people.models.get_anonymous_user_instance'
 )
 
 
 # Replacement of default authentication backend in order to support
 # permissions per object.
 AUTHENTICATION_BACKENDS = (
-    'oauth2_provider.backends.OAuth2Backend',
+    # 'oauth2_provider.backends.OAuth2Backend',
     'django.contrib.auth.backends.ModelBackend',
     'guardian.backends.ObjectPermissionBackend',
-    'account.auth_backends.EmailAuthenticationBackend',
+    # 'account.auth_backends.EmailAuthenticationBackend',
 
     # Authentication backend for facebook
     # 'social.backends.facebook.FacebookOAuth2',

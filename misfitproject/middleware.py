@@ -14,13 +14,13 @@ class LoginRequiredMiddleware(object):
 
     white_list_paths = (
         reverse('account_login'),
-        reverse('forgot_username'),
-        reverse('help'),
-        reverse('jscat'),
-        reverse('lang'),
-        '/account/(?!.*(?:signup))',
+        # reverse('forgot_username'),
+        # reverse('help'),
+        # reverse('jscat'),
+        # reverse('lang'),
+        # '/account/(?!.*(?:signup))',
         # block unauthenticated users from creating new accounts.
-        '/static/*',
+        # '/static/*',
     )
 
     white_list = map(
