@@ -14,11 +14,13 @@ class LoginRequiredMiddleware(object):
 
     white_list_paths = (
         reverse('account_login'),
+        reverse('account_signup'),
+        reverse('user_signup'),
         # reverse('forgot_username'),
         # reverse('help'),
         # reverse('jscat'),
         # reverse('lang'),
-        # '/account/(?!.*(?:signup))',
+        '/account/(?!.*(?:signup))',
         # block unauthenticated users from creating new accounts.
         # '/static/*',
     )
@@ -33,8 +35,8 @@ class LoginRequiredMiddleware(object):
     redirect_to = reverse('account_login')
 
     def process_request(self, request):
-        if not request.user.is_authenticated(
-        ) or request.user == get_anonymous_user():
+        # import pdb; pdb.set_trace()
+        if not request.user.is_authenticated() or request.user == get_anonymous_user():
             if not any(path.match(request.path) for path in self.white_list):
                 return HttpResponseRedirect(
                     '{login_path}?next={request_path}'.format(

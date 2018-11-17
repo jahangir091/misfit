@@ -2,9 +2,10 @@
 from django.conf.urls import patterns, url
 from django.views.generic import TemplateView
 
-from account.views import InviteUserView
+# from account.views import InviteUserView
 
 # from geonode.people.views import CreateUser, activateuser, UserSignup, InviteUser
+from views import UserSignup
 
 urlpatterns = patterns('misfitproject.people.views',
                        # url(r'^$', TemplateView.as_view(template_name='people/profile_list.html'),

@@ -20,5 +20,6 @@ urlpatterns = patterns('',
                        url(r'^/?$', IndexClass.as_view(), name='home'),
                         (r"^account/", include("account.urls")),
                         (r'^admin/', include(admin.site.urls)),
+                       (r'^user/', include('misfitproject.people.urls')),
                        )
 
