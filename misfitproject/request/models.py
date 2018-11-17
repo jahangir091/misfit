@@ -9,6 +9,8 @@ class UserRequest(models.Model):
     description = models.TextField()
     owner = models.ForeignKey('people.Profile', related_name='owner', blank=True, null=True)
     last_auditor = models.ForeignKey('people.Profile', related_name='last_auditor', blank=True, null=True)
+    reviewed_by = models.ForeignKey('people.Profile', related_name='reviewed_by', blank=True, null=True)
+    processed_by = models.ForeignKey('people.Profile', related_name='processed_by', blank=True, null=True)
     status = models.CharField(max_length=10, choices=[
         ("OPEN", _("Open")),
         ("PROCESSED", _("Processed")),

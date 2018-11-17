@@ -14,9 +14,9 @@
                         <th>Serial No</th>
                         <th>Request Title</th>
                         <th>Description</th>
-                        {% if HR %}
-                            <th>Requested By</th>
-                        {% endif %}
+                        {% if HR or MANAGER%} <th>Requested By</th> {% endif %}
+                        {% if MANAGER %} <th>Reviewed By</th> {% endif %}
+                        {% if allprocessed %} <th>Processed By</th> {% endif %}
                         <th>Request Date</th>
                         <th>Action</th>
                     </tr>
@@ -26,9 +26,9 @@
                        <td>{{ forloop.counter}}</td>
                        <td>{{ data.title }}</td>
                        <td>{{ data.description |slice:"0:15"}} ....</td>
-                       {% if HR %}
-                           <th>{{ data.owner }}</th>
-                       {% endif %}
+                       {% if HR or MANAGER %} <th>{{ data.owner }}</th> {% endif %}
+                       {% if MANAGER %} <th>{{ data.reviewed_by }}</th> {% endif %}
+                       {% if allprocessed %} <th>{{ data.processed_by }}</th>{% endif %}
                        <td>{{ data.date_created }}</td>
                        {% if MEMBER %}
                             <td>
@@ -39,6 +39,11 @@
                         {% if HR %}
                             <td>
                                 <a href="{% url "user_request_details" data.id %}"  class="" style="font-size:12px;">Review request</a>
+                            </td>
+                        {% endif %}
+                        {% if MANAGER %}
+                            <td>
+                                <a href="{% url "user_request_details" data.id %}"  class="" style="font-size:12px;">Process request</a>
                             </td>
                         {% endif %}
                     </tbody>

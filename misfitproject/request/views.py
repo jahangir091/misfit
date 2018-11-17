@@ -117,12 +117,27 @@ class AllProcessedUserRequestList(ListView):
     def get_queryset(self):
         return UserRequest.objects.filter(status='PROCESSED')
 
+    def get_context_data(self, **kwargs):
+        context = super(AllProcessedUserRequestList, self).get_context_data(**kwargs)
+        context['allprocessed'] = True
+        return context
+
+
 
 def user_request_review(request, request_id):
 
     if request.method == 'POST':
         user_request = UserRequest.objects.get(id=request_id)
         user_request.status = 'REVIEWED'
+        user_request.reviewed_by = request.user
         user_request.save()
         return HttpResponseRedirect(reverse("user_request_review_list"))
 
+
+def user_request_process(request, request_id):
+    if request.method == 'POST':
+        user_request = UserRequest.objects.get(id=request_id)
+        user_request.status = 'PROCESSED'
+        user_request.processed_by = request.user
+        user_request.save()
+        return HttpResponseRedirect(reverse("user_request_process_list"))

@@ -19,7 +19,7 @@ class IndexClass(ListView):
 def manager_required(view):
 
     def f(request, *args, **kwargs):
-        if request.user.groups.filter(name='hr').exists():
+        if request.user.groups.filter(name='manager').exists():
             return view(request, *args, **kwargs)
         else:
             return HttpResponseRedirect(settings.LOGIN_REDIRECT_URL)
