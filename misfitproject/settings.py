@@ -74,6 +74,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'account',
     'guardian',
+    'django_forms_bootstrap',
 
     #misfit apps
     'misfitproject.people',
@@ -190,3 +191,4 @@ EXTRA_LANG_INFO = {
 ACCOUNT_APPROVAL_REQUIRED = False
 ACCOUNT_SIGNUP_REDIRECT_URL = '/'
 ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = False
+LOGIN_REDIRECT_URL = '/'

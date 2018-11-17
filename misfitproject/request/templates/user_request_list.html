@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load bootstrap_tags %}
+{% load i18n %}
+
+
+
+{% block content %}
+<div class="gd-content container">
+    <div class="tab-content">
+        <ul class="no-style-list">
+            <table class="table table-hover" style="background:#ffffff;">
+                <thead>
+                    <tr>
+                        <th>Serial No</th>
+                        <th>Request Title</th>
+                        <th>Description</th>
+                        {% if HR %}
+                            <th>Requested By</th>
+                        {% endif %}
+                        <th>Request Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                {% for data in object_list %}
+                    <tbody id="allMemberDraftlayers_pen">
+                       <td>{{ forloop.counter}}</td>
+                       <td>{{ data.title }}</td>
+                       <td>{{ data.description |slice:"0:15"}} ....</td>
+                       {% if HR %}
+                           <th>{{ data.owner }}</th>
+                       {% endif %}
+                       <td>{{ data.date_created }}</td>
+                       {% if MEMBER %}
+                            <td>
+                                <a href="{% url "user_request_update" data.id %}"  class="" style="font-size:12px;">Edit</a>
+                                <a href="{% url "user_request_delete" data.id %}"  class="btn " style="font-size:12px;">Delete</a>
+                            </td>
+                        {% endif %}
+                        {% if HR %}
+                            <td>
+                                <a href="{% url "user_request_details" data.id %}"  class="" style="font-size:12px;">Review request</a>
+                            </td>
+                        {% endif %}
+                    </tbody>
+                {% empty %}
+                    <p>{% trans "No requests" %}</p>
+                {% endfor %}
+            </table>
+        </ul>
+    </div>
+</div>
+
+</div>
+{% endblock content %}
+

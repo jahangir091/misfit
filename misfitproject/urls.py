@@ -21,5 +21,6 @@ urlpatterns = patterns('',
                         (r"^account/", include("account.urls")),
                         (r'^admin/', include(admin.site.urls)),
                        (r'^user/', include('misfitproject.people.urls')),
+                       (r'^request/', include('misfitproject.request.urls')),
                        )
 
