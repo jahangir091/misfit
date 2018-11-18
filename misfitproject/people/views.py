@@ -18,11 +18,11 @@ class UserSignup(SignupView):
         user = self.created_user
         user_type = self.request.POST['usertype']
         if user_type == 'MANAGER':
-            user_group = Group.objects.get_or_create(name='manager')
+            user_group, created = Group.objects.get_or_create(name='manager')
             user_group.user_set.add(user)
         elif user_type == 'HR':
-            user_group = Group.objects.get_or_create(name='hr')
+            user_group, created = Group.objects.get_or_create(name='hr')
             user_group.user_set.add(user)
         else:
-            user_group = Group.objects.get_or_create(name='member')
+            user_group, created = Group.objects.get_or_create(name='member')
             user_group.user_set.add(user)
