@@ -1,3 +1,4 @@
+{% load bootstrap_tags %}
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <link href="{{ STATIC_URL }}css/loginpage.css" rel="stylesheet">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
@@ -26,26 +27,28 @@
 								<form id="login-form" action="{% url "user_signup" %}" method="post" role="form" style="display: block;">
                                     {% csrf_token %}
 
-                                    <div class="form-group">
-                                        <select name="usertype" class="form-control" id="exampleFormControlSelect1">
-                                            <option value="MEMBER">Member</option>
-                                            <option value="HR">HR Member</option>
-                                            <option value="MANAGER">Manager</option>
-                                        </select>
-                                    </div>
+                                    {{ form|as_bootstrap }}
 
-                                    <div class="form-group">
-									    <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
-									</div>
-									<div class="form-group">
-										<input type="email" name="email" id="email" tabindex="1" class="form-control" placeholder="Email Address" value="">
-									</div>
-									<div class="form-group">
-										<input type="password" name="password" id="password" tabindex="2" class="form-control" placeholder="Password">
-									</div>
-									<div class="form-group">
-										<input type="password" name="password_confirm" id="confirm-password" tabindex="2" class="form-control" placeholder="Confirm Password">
-									</div>
+{#                                    <div class="form-group">#}
+{#                                        <select name="usertype" class="form-control" id="exampleFormControlSelect1">#}
+{#                                            <option value="MEMBER">Member</option>#}
+{#                                            <option value="HR">HR Member</option>#}
+{#                                            <option value="MANAGER">Manager</option>#}
+{#                                        </select>#}
+{#                                    </div>#}
+{##}
+{#                                    <div class="form-group">#}
+{#									    <input type="text" name="username" id="username" required tabindex="1" class="form-control" placeholder="Username" value="">#}
+{#									</div>#}
+{#									<div class="form-group">#}
+{#										<input type="email" name="email" id="email" required tabindex="1" class="form-control" placeholder="Email Address" value="">#}
+{#									</div>#}
+{#									<div class="form-group">#}
+{#										<input type="password" name="password" id="password" required tabindex="2" class="form-control" placeholder="Password">#}
+{#									</div>#}
+{#									<div class="form-group">#}
+{#										<input type="password" name="password_confirm" id="confirm-password" required tabindex="2" class="form-control" placeholder="Confirm Password">#}
+{#									</div>#}
 
 									<div class="form-group">
 										<div class="row">
