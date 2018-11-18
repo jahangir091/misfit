@@ -8,7 +8,7 @@ from misfitproject.views import manager_required, hr_required
 # from geonode.people.views import CreateUser, activateuser, UserSignup, InviteUser
 from views import UserRequestList, UserRequestCreate, UserRequestUpdate, UserRequestDelete, UserRequestDetails
 from views import UserRequestReviewList, UserRequestProcessList, AllProcessedUserRequestList, user_request_review
-from views import user_request_process
+from views import user_request_process, render_pdf_view
 
 urlpatterns = patterns('misfitproject.people.views',
                        url(r"^list/$", UserRequestList.as_view(), name="user_request_list"),
@@ -22,7 +22,12 @@ urlpatterns = patterns('misfitproject.people.views',
 
                        url(r"^(?P<request_id>[0-9]+)/processrequest/$", manager_required(user_request_process),
                            name="user_request_process"),
+
+                        url(r"^getpdf/$", render_pdf_view, name="get_pdf"),
+
                        url(r"^processlist/$", manager_required(UserRequestProcessList.as_view()), name="user_request_process_list"),
                        url(r"^allprocessed/$", manager_required(AllProcessedUserRequestList.as_view()), name="user_request_allprocessed_list"),
+
+
 
                        )

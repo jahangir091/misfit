@@ -6,6 +6,9 @@
 
 {% block content %}
 <div class="gd-content container">
+
+    <a title="Download as pdf" href="{% url "get_pdf" %}"><i class="glyphicon glyphicon-download-alt align-right"></i></a>
+
     <div class="tab-content">
         <ul class="no-style-list">
             <table class="table table-hover" style="background:#ffffff;">
@@ -18,7 +21,9 @@
                         {% if MANAGER %} <th>Reviewed By</th> {% endif %}
                         {% if allprocessed %} <th>Processed By</th> {% endif %}
                         <th>Request Date</th>
-                        <th>Action</th>
+                        {% if not allprocessed %}
+                            <th>Action</th>
+                        {% endif %}
                     </tr>
                 </thead>
                 {% for data in object_list %}
@@ -30,21 +35,23 @@
                        {% if MANAGER %} <th>{{ data.reviewed_by }}</th> {% endif %}
                        {% if allprocessed %} <th>{{ data.processed_by }}</th>{% endif %}
                        <td>{{ data.date_created }}</td>
-                       {% if MEMBER %}
-                            <td>
-                                <a href="{% url "user_request_update" data.id %}"  class="" style="font-size:12px;">Edit</a>
-                                <a href="{% url "user_request_delete" data.id %}"  class="btn " style="font-size:12px;">Delete</a>
-                            </td>
-                        {% endif %}
-                        {% if HR %}
-                            <td>
-                                <a href="{% url "user_request_details" data.id %}"  class="" style="font-size:12px;">Review request</a>
-                            </td>
-                        {% endif %}
-                        {% if MANAGER %}
-                            <td>
-                                <a href="{% url "user_request_details" data.id %}"  class="" style="font-size:12px;">Process request</a>
-                            </td>
+                       {% if not allprocessed %}
+                           {% if MEMBER %}
+                                <td>
+                                    <a href="{% url "user_request_update" data.id %}"  class="" style="font-size:12px;">Edit</a>
+                                    <a href="{% url "user_request_delete" data.id %}"  class="btn " style="font-size:12px;">Delete</a>
+                                </td>
+                            {% endif %}
+                            {% if HR %}
+                                <td>
+                                    <a href="{% url "user_request_details" data.id %}"  class="" style="font-size:12px;">Review request</a>
+                                </td>
+                            {% endif %}
+                            {% if MANAGER %}
+                                <td>
+                                    <a href="{% url "user_request_details" data.id %}"  class="" style="font-size:12px;">Process request</a>
+                                </td>
+                            {% endif %}
                         {% endif %}
                     </tbody>
                 {% empty %}
