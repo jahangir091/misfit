@@ -24,3 +24,5 @@ urlpatterns = patterns('',
                        (r'^request/', include('misfitproject.request.urls')),
                        )
 
+#for serving images
+urlpatterns += static(settings.LOCAL_MEDIA_URL, document_root=settings.MEDIA_ROOT)

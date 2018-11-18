@@ -17,6 +17,7 @@ class Profile(AbstractUser):
         null=True,
         help_text=_('name of the responsible organization'))
     profile = models.TextField(_('Profile'), null=True, blank=True, help_text=_('introduce yourself'))
+    profile_pic = models.ImageField(blank=True, null=True)
     position = models.CharField(
         _('Position Name'),
         max_length=255,

@@ -4,6 +4,8 @@ from account.models import EmailAddress
 from account.forms import SignupForm
 from django.utils.translation import ugettext_lazy as _
 
+from models import Profile
+
 
 
 class UserSignupForm(SignupForm):
@@ -23,3 +25,9 @@ class UserSignupForm(SignupForm):
         if not qs.exists() or not settings.ACCOUNT_EMAIL_UNIQUE:
             return value
         raise forms.ValidationError(_("A user is registered with this email address."))
+
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['first_name', 'last_name','organization', 'profile', 'email', 'profile_pic', 'position', 'voice', 'address', 'city']

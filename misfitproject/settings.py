@@ -187,6 +187,15 @@ EXTRA_LANG_INFO = {
         },
 }
 
+MEDIA_ROOT = os.getenv('MEDIA_ROOT', os.path.join(PROJECT_ROOT, "uploaded"))
+
+# URL that handles the media served from MEDIA_ROOT. Make sure to use a
+# trailing slash if there is a path component (optional in other cases).
+# Examples: "http://media.lawrence.com", "http://example.com/media/"
+MEDIA_URL = os.getenv('MEDIA_URL', "/uploaded/")
+LOCAL_MEDIA_URL = os.getenv('LOCAL_MEDIA_URL', "/uploaded/")
+
+
 
 ACCOUNT_APPROVAL_REQUIRED = False
 ACCOUNT_SIGNUP_REDIRECT_URL = '/'

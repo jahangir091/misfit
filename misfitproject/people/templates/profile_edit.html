@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load bootstrap_tags %}
+{% load i18n %}
+
+{% block content %}
+
+<div class="gd-content container">
+    <div class="d-title">
+
+          {% trans "Edit Your Profile" %}
+
+    </div>
+    <div class="block-separator"></div>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+
+
+              <form id=""  method="post" enctype="multipart/form-data" action="">
+                  {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-12">
+                        {{ form|as_bootstrap }}
+                    </div>
+                </div>
+
+                <div class="block-separator"></div>
+                    <button type="submit" id="" class="btn btn-success">Update profile</button>
+              </form>
+
+        </div>
+    </div>
+      
+    </div>
+
+    
+{% endblock content %}
