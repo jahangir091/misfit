@@ -23,6 +23,9 @@ git clone https://github.com/jahangir091/misfit.git
 cd misfit
 pip install -r requirements.txt
 
+# database migration
+python manage.py migrate
+
 
 # run project
 python manage.py runserver
