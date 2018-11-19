@@ -100,7 +100,12 @@
                                         aria-haspopup="true" aria-expanded="false" title={{ request.user.username }}>
 {#                                        <span class="caret"></span>#}
 {#                                        <img style="border-radius: 50%; width:50px;" src="{{ STATIC_URL }}assets/images/about/_profile_image.jpg" alt="" class="img-responsive img-circle " />#}
+                                        {% if request.user.profile_pic %}
                                         <img style="border-radius: 50%; width:50px;" src="/uploaded/{{ request.user.profile_pic }}" alt="" class="img-responsive img-circle " />
+                                        {% else %}
+                                            <img style="border-radius: 50%; width:50px;" src="{{ STATIC_URL }}assets/images/about/default-avatar.jpg" alt="" class="img-responsive img-circle " />
+
+                                        {% endif %}
 
                                     </a>
                                     <ul class="dropdown-menu">
