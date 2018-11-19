@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% load bootstrap_tags %}
+{% load i18n %}
+
+{% block content %}
+
+<div class="gd-content container">
+    <div class="d-title">
+
+          {% trans "Add Request" %}
+
+    </div>
+    <div class="block-separator"></div>
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+
+
+              <form id=""  method="post" enctype="multipart/form-data" action="">
+                  {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-12">
+                        {{ form|as_bootstrap }}
+                    </div>
+                </div>
+
+                <div class="block-separator"></div>
+                  {% if userrequest.id %}
+                    <button type="submit" id="" class="btn btn-success">Update Request</button>
+                  {% else %}
+                    <button type="submit" id="" class="btn btn-primary ">Submit Request</button>
+                  {% endif %}
+              </form>
+
+        </div>
+    </div>
+      
+    </div>
+
+    
+{% endblock content %}

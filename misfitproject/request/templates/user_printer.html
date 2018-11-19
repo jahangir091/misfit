@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#customers {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#customers td, #customers th {
+    border: 1px solid #ddd;
+    padding: 4px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+    padding-top: 12px;
+    padding-bottom: 8px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+</style>
+</head>
+<body>
+<h1>EMPLOYEE REQUESTS REPORT</h1>
+{% now "jS F Y" %}
+<table id="customers">
+  <tr>
+    <th>Serial No</th>
+    <th>Request Title</th>
+    <th>Description</th>
+    <th>Requested By</th>
+    <th>Reviewed By</th>
+    <th>Processed By</th>
+    <th>Request Date</th>
+  </tr>
+  {% for data in object_list %}
+    <tr>
+        <td>{{ forloop.counter}}</td>
+        <td>{{ data.title }}</td>
+        <td>{{ data.description |slice:"0:15"}} ....</td>
+        <td>{{ data.owner }}</td>
+        <td>{{ data.reviewed_by }}</td>
+        <td>{{ data.processed_by }}</td>
+        <td>{{ data.date_created }}</td>
+    </tr>
+  {% endfor %}
+</table>
+
+</body>
+</html>

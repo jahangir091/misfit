@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load bootstrap_tags %}
+{% load i18n %}
+
+
+
+{% block content %}
+<div class="gd-content container">
+
+    <a title="Download as pdf" href="{% url "get_pdf" %}"><i class="glyphicon glyphicon-download-alt align-right"></i></a>
+
+    <div class="tab-content">
+        <ul class="no-style-list">
+            <table class="table table-hover" style="background:#ffffff;">
+                <thead>
+                    <tr>
+                        <th>Serial No</th>
+                        <th>Request Title</th>
+                        <th>Description</th>
+                        {% if HR or MANAGER%} <th>Requested By</th> {% endif %}
+                        {% if MANAGER %} <th>Reviewed By</th> {% endif %}
+                        {% if allprocessed %} <th>Processed By</th> {% endif %}
+                        <th>Request Date</th>
+                        {% if not allprocessed %}
+                            <th>Action</th>
+                        {% endif %}
+                    </tr>
+                </thead>
+                {% for data in object_list %}
+                    <tbody id="allMemberDraftlayers_pen">
+                       <td>{{ forloop.counter}}</td>
+                       <td>{{ data.title }}</td>
+                       <td>{{ data.description |slice:"0:15"}} ....</td>
+                       {% if HR or MANAGER %} <td>{{ data.owner }}</td> {% endif %}
+                       {% if MANAGER %} <td>{{ data.reviewed_by }}</td> {% endif %}
+                       {% if allprocessed %} <td>{{ data.processed_by }}</td>{% endif %}
+                       <td>{{ data.date_created }}</td>
+                       {% if not allprocessed %}
+                           {% if MEMBER %}
+                                <td>
+                                    <a href="{% url "user_request_update" data.id %}"  class="" style="font-size:12px;">Edit</a>
+                                    <a href="{% url "user_request_delete" data.id %}"  class="btn " style="font-size:12px;">Delete</a>
+                                </td>
+                            {% endif %}
+                            {% if HR %}
+                                <td>
+                                    <a href="{% url "user_request_details" data.id %}"  class="" style="font-size:12px;">Review request</a>
+                                </td>
+                            {% endif %}
+                            {% if MANAGER %}
+                                <td>
+                                    <a href="{% url "user_request_details" data.id %}"  class="" style="font-size:12px;">Process request</a>
+                                </td>
+                            {% endif %}
+                        {% endif %}
+                    </tbody>
+                {% empty %}
+                    <p>{% trans "No requests" %}</p>
+                {% endfor %}
+            </table>
+        </ul>
+    </div>
+</div>
+
+</div>
+{% endblock content %}
+
