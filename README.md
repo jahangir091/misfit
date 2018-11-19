@@ -12,6 +12,8 @@ pip install virtualenv
 
 # create virtual envirnment
 virtualenv env
+
+# activate virtual environment 
 source /env/bin/activate
 
 # clone project
