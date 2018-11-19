@@ -14,7 +14,7 @@ pip install virtualenv
 virtualenv env
 
 # activate virtual environment 
-source /env/bin/activate
+source env/bin/activate
 
 # clone project
 git clone https://github.com/jahangir091/misfit.git
