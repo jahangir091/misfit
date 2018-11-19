@@ -31,9 +31,9 @@
                        <td>{{ forloop.counter}}</td>
                        <td>{{ data.title }}</td>
                        <td>{{ data.description |slice:"0:15"}} ....</td>
-                       {% if HR or MANAGER %} <th>{{ data.owner }}</th> {% endif %}
-                       {% if MANAGER %} <th>{{ data.reviewed_by }}</th> {% endif %}
-                       {% if allprocessed %} <th>{{ data.processed_by }}</th>{% endif %}
+                       {% if HR or MANAGER %} <td>{{ data.owner }}</td> {% endif %}
+                       {% if MANAGER %} <td>{{ data.reviewed_by }}</td> {% endif %}
+                       {% if allprocessed %} <td>{{ data.processed_by }}</td>{% endif %}
                        <td>{{ data.date_created }}</td>
                        {% if not allprocessed %}
                            {% if MEMBER %}
