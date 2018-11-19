@@ -9,6 +9,7 @@ from views import UserSignup, ProfileEdit
 
 urlpatterns = patterns('misfitproject.people.views',
                        url(r"^signup/$", UserSignup.as_view(), name="user_signup"),
+                       url(r"^loginerror/$", 'loginerror', name="loginerror"),
                        url(r"^(?P<user_id>[0-9]+)/edit/$", ProfileEdit.as_view(),
                            name="profile_edit"),
 

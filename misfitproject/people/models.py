@@ -2,6 +2,8 @@ from django.db import models
 from django.utils.translation import ugettext as _
 from django.contrib.auth.models import AbstractUser, UserManager
 
+from django.db.models import signals
+
 # Create your models here.
 
 
@@ -51,3 +53,11 @@ class Profile(AbstractUser):
 def get_anonymous_user_instance(Profile):
     return Profile(pk=-1, username='AnonymousUser')
 
+
+# from django.core.urlresolvers import reverse
+# from django.http import Http404
+# def profile_pre_save(instance, sender, **kw):
+#     import pdb; pdb.set_trace()
+#     return Http404('this email is not permitted')
+#
+# signals.pre_save.connect(profile_pre_save, sender=Profile)

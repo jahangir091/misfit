@@ -3,3 +3,5 @@ django-user-accounts
 django-guardian==1.4.6
 django-forms-bootstrap==3.0.1
 xhtml2pdf
+
+python-social-auth==0.2.19

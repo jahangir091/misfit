@@ -16,6 +16,8 @@ class LoginRequiredMiddleware(object):
         reverse('account_login'),
         reverse('account_signup'),
         reverse('user_signup'),
+        ('/login/google-oauth2/'),
+        ('/complete/google-oauth2/'),
         # reverse('forgot_username'),
         # reverse('help'),
         # reverse('jscat'),

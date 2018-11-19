@@ -46,7 +46,24 @@
 											</div>
 										</div>
 									</div>
-									<div class="form-group">
+
+
+                                    <div class="col-md-12">
+                                        <a href="{% url 'social:begin' 'google-oauth2' %}?next={{ request.path }}" class="btn btn-gd-gray-gplus btn-lg col-md-12 col-sm-12 col-xs-12">
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <i class="fa fa-google-plus golicon" aria-hidden="true" style=""></i>
+                                                </div>
+                                                <div class="col-md-8 text-center">
+                                                    <span class="fbsign">Sign in with Google</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+
+
+
+                                   									<div class="form-group">
 										<div class="row">
 											<div class="col-lg-12">
 												<div class="text-center">

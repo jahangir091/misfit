@@ -97,7 +97,7 @@
 {#			                    <li class="smooth-menu"><a href="#contact">contact</a></li>#}
 			                    <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                        aria-haspopup="true" aria-expanded="false" title="jaha">
+                                        aria-haspopup="true" aria-expanded="false" title={{ request.user.username }}>
 {#                                        <span class="caret"></span>#}
 {#                                        <img style="border-radius: 50%; width:50px;" src="{{ STATIC_URL }}assets/images/about/_profile_image.jpg" alt="" class="img-responsive img-circle " />#}
                                         <img style="border-radius: 50%; width:50px;" src="/uploaded/{{ request.user.profile_pic }}" alt="" class="img-responsive img-circle " />

@@ -22,7 +22,12 @@ urlpatterns = patterns('',
                         (r'^admin/', include(admin.site.urls)),
                        (r'^user/', include('misfitproject.people.urls')),
                        (r'^request/', include('misfitproject.request.urls')),
+
+                        #social authentication
+                        url('', include('social.apps.django_app.urls', namespace='social')),
                        )
 
 #for serving images
 urlpatterns += static(settings.LOCAL_MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+

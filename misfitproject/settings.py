@@ -76,6 +76,9 @@ INSTALLED_APPS = (
     'guardian',
     'django_forms_bootstrap',
 
+    #social authentication
+    'social.apps.django_app.default',
+
     #misfit apps
     'misfitproject.people',
     'misfitproject.request'
@@ -90,7 +93,10 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    'misfitproject.middleware.LoginRequiredMiddleware'
+    'misfitproject.middleware.LoginRequiredMiddleware',
+    
+    #social auth
+    'social.apps.django_app.middleware.SocialAuthExceptionMiddleware',
 )
 
 ROOT_URLCONF = 'misfitproject.urls'
@@ -106,7 +112,11 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'misfitproject.context_processor.resource_urls'
+                'misfitproject.context_processor.resource_urls',
+
+                #social auth
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect',
             ],
         },
     },
@@ -156,7 +166,7 @@ AUTHENTICATION_BACKENDS = (
 
     # Authentication backend for facebook
     # 'social.backends.facebook.FacebookOAuth2',
-    # 'social.backends.google.GoogleOAuth2',
+    'social.backends.google.GoogleOAuth2',
 
 )
 
@@ -202,3 +212,12 @@ ACCOUNT_SIGNUP_REDIRECT_URL = '/'
 ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = False
 LOGIN_REDIRECT_URL = '/'
 ACCOUNT_EMAIL_CONFIRMATION_EMAIL = False
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '86709134482-i0ej60i4nar3punavu68f57ckec2iv2k.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '4S7njZcDWn5nhsUTWW55_jby'
+SOCIAL_AUTH_GOOGLE_OAUTH2_WHITELISTED_DOMAINS = ['misfit.tech']
+SOCIAL_AUTH_LOGIN_ERROR_URL = '/'
+
+
+# DEBUG = False
+ALLOWED_HOSTS = ['*']

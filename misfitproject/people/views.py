@@ -8,6 +8,7 @@ from account.forms import SignupForm, LoginUsernameForm
 from django.http import Http404, HttpResponseRedirect, HttpResponseForbidden
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
+from django.http import HttpResponse
 
 from forms import UserSignupForm, ProfileUpdateForm
 from models import Profile
@@ -51,3 +52,7 @@ class ProfileEdit(UpdateView):
 
     def get_success_url(self):
         return reverse('home')
+
+def loginerror():
+    template_path = 'loginerror.html'
+    return response
